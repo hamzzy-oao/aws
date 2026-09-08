@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습예제 메뉴</title>
+    <style>
+       li{list-style: none;text-align: center;text-decoration: none; }
+
+       .box1{border: 3px solid black; height: 50px;width: 49%}
+
+       .box2{border: 3px solid red ; height: 50px; width: 49%; display: none;}
+
+       .main1{float: left;margin-left: -3px;}
+       .main2{float: left;margin-left: -3px;}
+
+            
+         .main1:hover~.sub1 {display: block;} 
+         .main2:hover~.sub2 {display: block; ;}     
+
+
+       
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="main list">
+                <li class="box1 main1">메뉴</li>
+                <li class="box2 sub2 ">
+                    <div>서브메뉴</div>
+                    <div>서브메뉴</div>
+                <li class="box1 main2">메뉴</li>
+                <li class="box2 sub1">
+                    <div>서브메뉴</div>
+                    <div>서브메뉴</div>
+                </li>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+</body>
+</html>

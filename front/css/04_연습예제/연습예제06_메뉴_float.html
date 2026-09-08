@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 float 예제</title>
+    <style>
+        .list-menu{list-style: none;text-align: center;text-decoration: none;}
+        .list-menu:hover{text-decoration: underline;}
+        .item-menu{border: 3px solid black; height: 50px;float: left;width: 33%;margin-left: -3.3px;}
+        .list-menu::after{content: '';clear: both; display: block;}
+
+        .item-menu2 ~ .item-menu2{border-left: 3px solid black;}
+        .item-menu2{height: 50px;float: left;width: 33%;box-sizing: border-box;}
+        .list-menu2::after{content: '';clear: both; display: block;}
+        .list-menu2{list-style: none;text-align: center;text-decoration: none;}
+        .item-menu2:hover{text-decoration: underline;}
+        .list-menu2{border: 3px solid black}
+        .link-menu{color: black;text-decoration: none;}
+
+        
+    </style>
+</head>
+<body>
+    <!-- 
+    메뉴 글자색은 검은색, 밑줄 없음, hover하면 밑줄 추가
+    메뉴 높이는 50px
+    테두리 두께는 3px
+    주의사항 : 메뉴와 메뉴 사이의 테두리가 두꺼워지지 않도록 작업 
+    -->
+    <header>
+    <nav>
+            <ul class="list-menu">
+                <li class="item-menu">
+                <a href="#" class="list-menu">메뉴1</a>
+                </li >       
+                <li class="item-menu">
+                <a href="#" class="list-menu">메뉴2</a>
+                </li >
+                <li class="item-menu">
+                    <a href="#" class="list-menu">메뉴3</a>
+                </li >
+
+            </ul>
+    </nav>
+
+       <nav>
+            <ul class="list-menu2">
+                <li class="item-menu2">
+                <a href="#" class="item-menu2" class="link-menu">메뉴1</a>
+                </li >       
+                <li class="item-menu2">
+                <a href="#" class="item-menu2" class="link-menu">메뉴2</a>
+                </li >
+                <li class="item-menu2">
+                    <a href="#" class="item-menu2" class="link-menu">메뉴3</a>
+                </li >
+
+            </ul>
+    </nav>
+     
+   </header> 
+</body>
+</html>

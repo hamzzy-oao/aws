@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 속성 예제</title>
+</head>
+<body>
+    <!-- 더보기 버튼을 클릭하면 접기가 되고, 접기 버튼을 클릭하면 더보기가 되도록 작성하세요. -->
+     <button id="btn1">더보기</button>
+     <button id="btn2">더보기</button>
+     <br>
+     <!-- 공백 체크 버튼을 클릭하면 입력된 input태그의 값이 빈 문자열인지 아닌지 확인하는 코드를 작성하세요 -->
+     <input type="text" id="text">
+     <button id="btn3">공백 체크</button>
+<script>
+
+    const btn1 = document.querySelector('#btn1');
+
+    btn1.addEventListener('click', function(){
+        btn1.textContent = '접기' ;
+    });
+    
+     const btn2 = document.querySelector('#btn2');
+
+    btn2.addEventListener('click', function(){
+        if (btn2.textContent == '더보기') {
+            btn2.textContent = '접기'
+            
+        }else if(btn2.textContent == '접기') {
+            btn2.textContent = '더보기'
+        } 
+    });
+    // 이벤트 등록 태그 선택
+    const btn3 = document.querySelector('#btn3');
+    // 해당 태그 이벤트 등록
+     const text = document.querySelector('#text');
+    btn3.addEventListener('click', function(){
+       let value = text.value;
+       console.log(value)
+        if (value =="") {
+            alert("공백입니다.")
+        }
+        else{alert("공백이 아닙니다.")}
+    });
+
+    
+
+   
+
+
+</script>
+    
+</body>
+</html>

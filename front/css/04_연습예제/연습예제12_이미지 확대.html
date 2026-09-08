@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 확대 예제</title>
+</head>
+<style>
+    .box{width: 150px; }
+    .wrap{width: 100%; height: 150px;
+        /* 이미지 확대했을때 넘어가는 부분 안보이게 처리 */
+        overflow: hidden;
+        /* 둥근테두리 */
+        border-radius: 4px;
+        /*  */
+        box-shadow: 0 0 2px 0  rgba(0,0,0,1);
+    }
+    .title{
+    /* 글자 한줄 높이를 20px > 높이가 20px로 고정 */
+    line-height: 20px;margin-top: 5px;}
+    .line{display: block}
+    .box:hover img{transform: scale(1.5);
+    transition: tr;}
+    .box:hover .line{text-decoration: underline;}
+
+    .box img{
+    transition: transform 500ms;}
+
+
+
+</style>
+
+<body>
+    <div class="box">
+        <!-- 이미지가 들어갈 박스 -->
+        <div class="wrap">
+        <img src="../img/제리.jpg" alt="제리" width="150" height="150"></div>
+        <!-- 이미지 설명 문구 -->
+        <div class="title"></div>
+        <span class="line">귀여운</span>
+        <span class="line">제리입니다</span>
+    </div>
+</body>
+</html>

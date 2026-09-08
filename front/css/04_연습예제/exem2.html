@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>메모패드</title>
+   <style>
+      *{ padding: 0; margin: 0; color: black;}
+      ul, ol{list-style: none;}
+      a{ text-decoration: none;}
+
+      .container{
+         width: 500px; margin: 0 auto;
+         background-color: rgb(243, 242, 242); padding : 10px 20px
+      }
+      .input-area{
+         display: flex; margin-bottom: 10px;
+         justify-content: space-between;
+      }
+      h1{ text-align: center; margin: 10px 0;   }
+      .input{
+         height: 100px; width: 89%; border-radius: 5px;
+         border: 1px solid rgb(207, 206, 206); box-sizing: border-box;
+      }
+      .add-btn{
+         width: 10%; background-color: rgb(209, 209, 255); color: white;
+         font-weight: bold;
+         border: 1px solid rgb(170, 170, 255); border-radius: 5px;
+      }
+
+      .memo-item{
+         margin-bottom: 10px;
+         background-color: white; border-radius: 5px;
+         box-shadow: 0px 0px 2px 0 rgb(207, 206, 206);
+         padding: 10px;   display: flex; justify-content: space-between;
+      }
+   </style>
+</head>
+<body>
+   <div class="container">
+      <h1>메모 패드</h1>
+
+      <form class="input-area" id="form">
+         <textarea name="memo" class="input"></textarea>
+         <button class="add-btn">추가</button>
+      </form>
+      
+      <ul class="memo-list">
+         <li class="memo-item">
+            <span class="memo">메모입니다.</span>
+            <a href="#" class="del-btn">삭제</a>
+         </li>
+         <li class="memo-item">
+            <span class="memo">메모입니다.</span>
+            <a href="#" class="del-btn">삭제</a>
+         </li>
+      </ul>
+   </div>
+</body>
+</html>

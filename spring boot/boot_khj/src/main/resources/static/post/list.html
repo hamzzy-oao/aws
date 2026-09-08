@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 부트: 게시글 </title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/Layout.js"></script>
+	<script src="/js/auth.js"></script>
+</head>
+<body>
+	<app-header></app-header>
+	<div class="container">
+		<br><h1> 게시글 상세 </h1><br>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>추천/비추천</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td><a href="/post/detail.html?num=1">공지사항입니다.</a></td>
+					<td>asd</td>
+					<td>2026-08-20</td>
+					<td>0/0</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/post/insert.html" class="btn btn-outline-success btn-insert">글쓰기</a>
+	</div>
+	
+<script>
+		
+	const 글쓰기버튼 = document.querySelector(".btn-insert");
+	글쓰기버튼.addEventListener("click", async e=>{
+		e.preventDefault();
+		const info = await getMyInfo();
+		//로그인 안했으면 컨펌창 띄우고 
+		if(!info || !info.username || info.username == "anonymousUser"){
+			
+			if(confirm("로그인이 필요한 서비스입니다.\n로그인페이지로 이동하겠습니까?")){
+				location.href="/login.html"
+			}	
+		}
+		else{
+			location.href="/post/insert.html";
+		}
+	});
+		
+		
+</script>
+	
+	<script>
+		//게시글 목록을 가져와서 콘솔에 출력하도록 작업
+		
+		async function getPostList(){
+			
+		
+		//서버에 게시판 목록을 요청
+			try{
+				const response = await fetch("/api/post");
+			
+				if(!response.ok){
+					console.log("정상 종료 아님");
+					return;
+				}
+				const result = await response.json();
+				let str = '';
+				
+				if(result.length == 0){
+					str ='<tr><td colspan="5" class="text-center">등록된 게시글이 없습니다.</td></tr>';
+					const tbodyEl = document.querySelector(".table tbody");
+					tbodyEl.innerHTML = str;
+					return;
+				}
+				
+				result.forEach(post=>{
+					str +=`
+						<tr>
+							<td>${post.id}</td>
+							<td><a href="/post/detail.html?num=${post.id}">${post.title}</a></td>
+							<td>${post.memberId}</td>
+							<td>${post.createdAt.slice(0,10)}</td>
+							<td>${post.upCount}/${post.downCount}</td>
+						</tr>
+					`
+				});
+				console.log(result);
+				
+				const tbodyEl = document.querySelector(".table tbody");
+				tbodyEl.innerHTML = str;
+		}catch(e){
+			console.log("에러발생 :", e)
+			}
+		
+		}
+		getPostList();
+	</script>
+</body>
+</html>

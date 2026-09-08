@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class 활용 예제</title>
+    <style>
+        .box{
+            width: 100px; height: 100px; background-color: lightcoral; border: 3px solid transparent;
+        }
+
+        .bg-red{
+            background-color: red;
+        }
+        .border{
+            border-color: black;
+        }
+        .box2{
+            height: 200px; border: 3px solid transparent;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <button id="btn1">빨강 배경으로</button>
+        <button id="btn2">빨강 배경 제거</button>
+        <button id="btn3">빨강 배경 추가/제거</button>
+        <button id="btn4">박스2로 변경</button>
+        <button id="btn5">박스1로 변경</button>
+    </div>
+    <div class="box"></div>
+    <script>
+    /* 
+    class 속성의 값들을 확인하거나 가져오거나 변경하는 작업을 통해 요소에 스타일을 적용
+
+    요소.classList
+    - 요소의 클래스 목록을 가져옴
+    요소.classList.add(클래스A)
+    - 요소의 클래스A를 추가
+    요소.classList.remove(클래스A)
+    - 요소의 클래스A를 제거
+    요소.classList.toggle(클래스A)
+    - 요소의 클래스A가 있으면 제거, 없으면 추가
+    요소.classList.contains(클래스A)
+    - 요소의 클래스A가 있으면 true, 없으면 false
+    요소.classList.replace(클래스A)
+    - 요소의 클래스A를 클래스B로 변경
+    요소.classList.item(위치A)
+    - 요소의 클래스A에 있는 클래스를 가져옴
+    */
+   const btn = document.querySelector('#btn1')
+   btn.addEventListener('click',function(){
+        console.log(1)
+   })
+    //공통 box 요소 선택
+   const box = document.querySelector('.box');
+
+   //1.요소 선택
+   const btn1 = document.querySelector('#btn1');
+   //2. 이벤트 등록
+   btn1.addEventListener('click',function(){
+    //box 요소에 bg-red 클래스 추가
+    box.classList.add('bg-red')
+   })
+
+   const btn2 = document.querySelector('#btn2');
+   //2. 이벤트 등록
+   btn2.addEventListener('click',function(){
+    box.classList.remove('bg-red')
+   });
+
+   const btn3 = document.querySelector('#btn3');
+   //2. 이벤트 등록
+   btn3.addEventListener('click',function(){
+    box.classList.toggle('bg-red')
+   });
+
+   const btn4 = document.querySelector('#btn4');
+   //2. 이벤트 등록
+   btn4.addEventListener('click',function(){
+    box.classList.replace('box','box2');
+   });
+
+     const btn5 = document.querySelector('#btn5');
+   //2. 이벤트 등록
+   btn5.addEventListener('click',function(){
+    box.classList.replace('box2','box');
+   });
+
+    </script>
+</body>
+</html>

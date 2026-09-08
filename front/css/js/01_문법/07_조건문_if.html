@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+<script>
+/* 
+ 조건문
+ - 상황에 따라 결과가 달라질 때 사용
+ - 예시 ) 음료수 자판기
+    누른 메뉴에 따라 음료가 달라짐
+ - 말로 표현했을때 ~이면 ~해라 라고 표현되면 조건문 사용 
+ - 성적이 90점 이상이고 100점 이하이면 학점은 A 출력해라 
+ - 면허증을 가져왔거나 민증을 가져왔거나 여권을 가져왔으면 토익 응시가 가능하다.
+
+ IF문 
+ - 모든 조건문은 if문으로 표현 가능하다.
+ - 문법)
+    if(조건식){실행문;}
+ - 문법 설명
+    조건식 : 결과가 참 또는 거짓이 되는 식 
+    하지만 자바스크립트에서는 결과가 true / false가 아니어도 동작을 함
+- 문법 사용 예시
+   a이면 b해라 > 조건문 사용 가능 
+   > if(a){b;}
+   성적을 조건문에 적용
+   if(성적이 90점 이상이고 100점이하){학점을 A로 출력해라;}
+   토익을 조건문에 적용
+   if(면허증이 있거나 민증이 있거나 여권이 있다){토익 응시 가능하다;}
+*/  
+
+let 면허증 = false, 민증 = false, 여권 = false;
+
+if(면허증 || 민증 || 여권 ){
+document.write('토익 응시 가능<br>');} // 셋 중 하나만 있으면 토익 응시 가능
+
+if(!면허증 && !민증 && !여권){
+document.write('토익 응시 불가능<br>');} // 셋 다 없으면 토익 응시 불가능
+
+let score = 95;
+
+
+if(score >= 90 && score <= 100 ){
+   document.write('학점 A<br>');} 
+
+/* 
+if else문
+- a이면 b해라 아니면 c해라 
+- 모 아니면 도일때 
+- 신분증이 있으면 토익 응시가 가능하고 아니면 토익 응시가 불가능 
+- if문 2개 쓸걸 하나로 줄임 > 조건식을 하나 덜씀
+- 문법
+if(조건식){
+   실행문2;
+}
+else{
+실행문2
+}
+*/
+
+if(!면허증 || !민증 || !여권 ){
+document.write('토익 응시 가능<br>');} // 셋 중 하나만 있으면 토익 응시 가능
+
+else{document.write('토익 응시 불가능<br>');} // 셋 다 없으면 토익 응시 불가능
+
+/* 
+if else if문
+- 조건이 3개 이상일때
+- 조건이 2개인데 둘 중 하나가 아닐때
+- 문법
+// 조건식1이 참이면 실행문1을 실행
+   if(조건식1){
+   실행문1;
+   }
+   else if(
+   조건식2){
+   실행문2;
+   }
+   ⋯
+   else{실행문;
+   }
+*/
+
+/* 
+ 성적이 90점 이상이고 100점이하이면 A로 출력하고
+ 성적이 80점 이상이고 90점미만이면 B로 출력하고
+ 성적이 70점 이상이고 80점미만이면 C로 출력하고
+ 성적이 60점 이상이고 80점미만이면 D로 출력하고
+ 성적이 50점 이상이고 80점미만이면 F로 출력하고
+ 아니면 잘못된 성적이라고 출력하세요.
+*/
+
+if(score >= 90 && score <= 100 ){
+   document.write( score + '점은 A학점<br>');
+} 
+else if(score >= 80 && score < 90  ){
+   document.write( score + '점은 B학점<br>');
+}
+else if(score >= 70 && score < 80  ){
+   document.write( score + '점은 C학점<br>');
+} 
+else if(score >= 60 && score < 70  ){
+   document.write( score + '점은 D학점<br>');
+} 
+else if(score >= 50 && score < 60  ){
+   document.write( score + '점은 F학점<br>');
+} 
+else{
+   document.write('잘못된 성적 입니다.<br>')
+}
+
+성적 = 20;
+/*
+ 아래 코드는 대입연사자를 써서 기존 성적과 상관없이 무조건 100이 들어가고
+ 100은 거짓(0, false, '', NaN등)이 아니기 때문에 참으로 실해
+ 100점이 만점이라 실행되는게 아니라 100이 거짓이 아니기 때문에 실행
+ if(성적=100){
+    document.write('만점입니다.!!<br>');
+  }
+*/
+
+if(성적 < 0 || 성적 > 100){
+   document.write(성적 + '점은 잘못된 성적<br>');
+}
+else if(성적 >= 90){
+   document.write(성적 + '점은 A학점<br>');
+}
+else if(성적 >= 80){
+   document.write(성적 + '점은 B학점<br>');
+}
+else if(성적 >= 70){
+   document.write(성적 + '점은 C학점<br>');
+}
+else if(성적 >= 60){
+   document.write(성적 + '점은 D학점<br>');
+}
+else {
+   document.write(성적 + '점은 F학점<br>');
+}
+
+/* 
+중첩 if문
+- if문 안에 if문이 들어가는 형태
+if(조건식){
+   if(조건식2){
+   실행문1;
+   }else{
+      실행문2
+   }
+}
+- 위 중첩 if문을 일반 if문으로 변경
+if(조건식 && 조건식2){
+   실행문1;
+}else if(조건식){
+   실행문2;
+}
+*/
+
+
+</script> 
+</body>
+</html>

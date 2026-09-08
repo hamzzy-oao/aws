@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header style="text-align: right">
+		<span class="name">XXX</span>님이 접속했습니다. 
+	</header>
+	<h1>데이터 전송 연습 페이지</h1>
+	<a href="/">메인 페이지로 이동</a>
+	<pre>
+		데이터 전송 방법 2
+		경로에 뒤에 데이터 실어 보내기 : /article?search=기사&page=1
+			- "기사"와 1이 보낼 데이터
+	</pre>
+	<form id="form">
+	<input type="text" name="search">
+	<input type="hidden" name="page" value="1">
+	<button>검색</button>
+	</form>
+	
+	<script type="text/javascript">
+	
+		const formEl = document.querySelector("#form");
+    	
+		formEl.addEventListener("submit", e=>{
+        	e.preventDefault();
+        
+       	 const formData = new FormData(formEl);
+       	 //form태그 안에 있는 입력값들을 가져와서 url 경로 뒤에 붙이는 객체
+       	 const searchParams = new URLSearchParams(formData);
+       	 //변수=값&변수=값 형태의 문자열로 변환
+         const queryString = searchParams.toString();
+        
+         sendDate1("/article3",queryString);
+     });
+		
+	async function sendDate1(url, queryString){
+		try{
+			//데이터 전송
+			const response = await fetch(url+"?"+queryString);
+			//정상응답이 아님 처리
+			if(!response.ok){
+				throw new Error("서버 응답 에러 : "+ response.status);
+			}
+			//정상응답 처리
+			const result = await response.text();
+			console.log(result);
+		}catch(e){
+			console.error("예외발생 : \n"+ e)
+		}
+	}
+		
+	</script>
+</body>
+</html>

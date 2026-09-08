@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹서비스 UI 구현</title>
+    <style>
+      * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+#form {
+    width: 90%;
+    max-width: 440px;
+    margin: 20px auto;
+    display: flex;
+    gap: 8px;
+}
+
+
+#content {
+    flex: 1;
+    height: 100px;
+    resize: none;
+    padding: 12px 15px;  
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    text-align: left;
+    vertical-align: top;
+}
+
+#content::placeholder {
+    color: #aaaaaad5;       
+    font-size: 14px;
+}
+
+.submit {
+    width: 55px;
+    height: 100px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2864e8;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #1f55c7;
+}
+
+
+.table {
+    width: 90%;
+    max-width: 440px;
+    margin: 15px auto;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+
+#memoList tr {
+    background-color: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+
+#memoList td:first-child {
+    padding: 15px;
+    font-size: 15px;
+    line-height: 1.5;
+    width: 85%;
+    border-radius: 10px 0 0 10px
+}
+
+
+#memoList td:last-child {
+    padding-right: 15px;
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+     border-radius: 0 10px 10px 0;
+}
+
+#memoList td:last-child:hover {
+    color: #ff4d4d;
+}
+
+textarea {
+    display: block;
+}
+        
+
+    </style>
+</head>
+<body>
+    <h1> 메모패드 📝</h1>
+      <form action="" id="form">
+      <textarea id="content" placeholder="메모를 입력하세요..."></textarea>
+      <button class="submit">추가</button>
+   </form>
+
+   <table class="table">
+            <tbody id="memoList">
+        </tbody>
+   </table>
+<script>
+/* 
+[평가 과제]
+HTML, CSS, JavaScript를 활용하여 메모 관리 웹 애플리케이션을 설계하고 구현한다.
+-주요 기능: 메모 추가, 삭제, 데이터 저장(LocalStorage)
+-주요 UI: 입력창, 리스트 영역
+
+[문항1]
+[데이터 구조 및 요구사항 구현]
+- 메모 데이터 구조를 설계하고 코드에 반영한다.
+- 필수 필드: content
+
+*/
+const form = document.querySelector("#form");
+const memoList = document.querySelector("#memoList");
+
+let memos = JSON.parse(localStorage.getItem("memos")) || [];
+
+
+memos.forEach(function(memo) {
+    insertMemoToTable(memo);
+});
+
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const contentEl = document.querySelector("#content");
+    let content = contentEl.value;
+
+    let memo = {
+        content: content
+    };
+
+    insertMemoToTable(memo);
+
+    memos.push(memo);
+
+    localStorage.setItem("memos", JSON.stringify(memos));
+
+    contentEl.value = "";
+});
+
+
+function insertMemoToTable(memo) {
+    let tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${memo.content}</td>
+        <td>
+            <button onclick="deleteMemo(this)">삭제</button>
+        </td>
+    `;
+
+    memoList.appendChild(tr);
+}
+
+
+function deleteMemo(button) {
+    let tr = button.parentElement.parentElement;
+    let content = tr.children[0].innerText;
+
+    tr.remove();
+
+    memos = memos.filter(function(memo) {
+        return memo.content !== content;
+    });
+
+    localStorage.setItem("memos", JSON.stringify(memos));
+}
+
+
+</script>
+    
+</body>
+</html>

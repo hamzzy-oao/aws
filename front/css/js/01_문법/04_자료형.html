@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    1. 숫자 : number
+    - 정수, 실수 모두 포함
+    */
+    let num1 = 1;
+    let num2 = 1.23;
+    let num3 = NaN; //Not a number : 숫자가 아니다 
+    let num4 = Infinity; //무한대
+    /* 
+    2. 문자열 : string
+    - '', "", `` 안에 들어 있는 글자들 
+    - ``안에 변수값을 넣을 수 있음
+        > `${변수명}`
+    */
+    let str1 = "안녕1";
+    let str2 = '안녕2';
+    let str3 = `안녕3`;
+    let str4 = `${str3}하세요.`;
+    // ``안쓰고 두 문자열 합치기
+    let str5 = str1 + "하세요.";
+
+     /*
+    3. boolean
+    - 참(true) 또는 거짓(false)
+    */
+   let is0k = true;
+
+    /*
+    4. null
+    - 값이 비어 있음
+    */
+   let obj = null;
+    /*
+    5. underfined
+    - 값이 정해지지 않음
+    */
+   let name;
+    /*
+    6. bight
+    - 큰 정수
+    - 정수 뒤에 n을 붙힘
+    */
+   let bigNum = 1234567890123456789n;
+   console.log(bigNum)
+    /*
+
+    7. 심볼 : symbol
+    - 고유하고 변경 불가능한 자료형
+    - 주로 객체 속성키로 사용 
+    
+    8. object
+    - 배열, 객체, null
+    
+    9.function
+    - 함수
+    
+    typeof 값
+    - 값의 타입을 알려주는 연산자
+    */
+   
+   document.write(`123의 타입은?${typeof 123}<br>`)
+   document.write(`123n의 타입은?${typeof 123n}<br>`)
+   document.write(`'123'의 타입은?${typeof '123'}<br>`)
+
+
+    </script>
+    
+</body>
+</html>

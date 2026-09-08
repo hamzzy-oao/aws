@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if문 예제</title>
+</head>
+<body>
+<script>
+/* 
+숫자가 0보다 크면 양수라고 출력하고
+숫자가 0보다 작으면 음수라고 출력하고
+숫자가 0이면 0이라고 출력하세요.
+*/
+
+/* 
+아래 예제를 if 3개로 구현하면 무조건 3번 비교함
+아래 예제는 if else로 구현되어 있기 때문에 최소 1번, 최대 2번 비교하여 if else가 더 효율적
+*/
+
+let 숫자 =7;
+
+if(숫자 > 0){
+    document.write(`${숫자}는 양수`)
+}
+else if(숫자 < 0){
+    document.write(`${숫자}는 음수`)
+}
+else{
+    document.write(`0`)
+}
+
+// 숫자가 홀수인지 짝수인지 판별하는 코드를 작성하세요. 
+
+
+if(숫자 % 2 == 0){
+   document.write(슷자 +'는 짝수<br>');
+}
+else{document.write(숫자 +'는 홀수<br>');
+}
+
+/* 
+숫자가 2배의, 3의 배수, 6의 배수인지 판별하세요.
+*/
+
+let num = 17;
+
+if(num % 6 == 0){
+   document.write(`${num}은 6의 배수<br>`);
+}
+else if(num % 2 == 0){
+   document.write(`${num}은 2의 배수<br>`);
+}
+else if(num % 3 == 0){
+   document.write(`${num}은 3의 배수<br>`);
+}
+else{document.write(`${num}은 2,3,6의 배수가 아님<br>`);
+}
+
+//중첩 if문 적용
+
+if(num % 2 == 0){
+    if(num % 3 == 0){
+   document.write(`${num}은 6의 배수<br>`);
+}
+else{
+   document.write(`${num}은 2의 배수<br>`);
+}
+}
+else if(num % 3 == 0){
+   document.write(`${num}은 3의 배수<br>`);
+}
+else{document.write(`${num}은 2,3,6의 배수가 아님<br>`);
+}
+
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습예제 메뉴</title>
+    <style>
+      /* 생각치 못한 여백이 들어가는 걸 방지하기 위해서 */
+      *{margin: 0; padding: 0;}
+
+      ul{list-style: none; text-decoration: none;color: black;}
+      /* flex-wrap의 기본값이 nowrap이어서 메뉴들 크기가 1px씩 달라도 내려가지 않고 한 라인에 배치 
+      > 메뉴의 너비 계산 실수가 있어도 한줄에 배치*/
+      .list-menu{display: flex;}
+
+      .item-menu{width: 100%;position: relative;}
+
+      .title-menu{border: 3px solid black;line-height: 50px;text-align: center; cursor: pointer;}
+
+      .item-menu+.item-menu{margin-left: -3px;}
+
+      .item-menu:hover{background: lightgrey;}
+
+      .container-sub{position:absolute;bottom: 0;
+      transform: translateY(100%);width: 100%; display: none;}
+
+      .item-sub{border: 3px solid red;}
+
+      .item-sub+.item-sub{margin-top: -3px;}
+
+      .link-sub{display: block;line-height: 50px;text-align: center;}
+
+      .link-sub:hover{background-color: lightslategray;}
+
+      .item-menu:hover .container-sub{display: block;}
+    
+    </style>
+</head>
+<body>
+   <!-- 서브 메뉴를 메뉴 안에 넣는 이유 : 메뉴에 hover를 해서 서브 메뉴를 보이게 한 후
+    서브 메뉴를 hover해도 서브메뉴가 사라지지 않게 하기 위해서
+    ul 태그는 리스트 li태그는 아이템 
+    -->
+       <ul class="list-menu">
+      <li class="item-menu">
+         <div class="title-menu">메뉴</div>
+         <div class="container-sub">
+            <ul class="list-sub">
+               <li class="item-sub">
+                  <a href="" class="link-sub">서브메뉴</a>
+               </li>
+               <li class="item-sub">
+                  <a href="" class="link-sub">서브메뉴</a>
+               </li>
+            </ul>
+         </div>
+      </li>
+      <li class="item-menu">
+         <div class="title-menu">메뉴</div>
+         <div class="container-sub">
+            <ul class="list-sub">
+               <li class="item-sub">
+                  <a href="" class="link-sub">서브메뉴</a>
+               </li>
+               <li class="item-sub">
+                  <a href="" class="link-sub">서브메뉴</a>
+               </li>
+            </ul>
+         </div>
+      </li>
+   </ul>
+    
+</body>
+</html>

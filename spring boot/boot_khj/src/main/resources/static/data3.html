@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header style="text-align: right">
+		<span class="name">XXX</span>님이 접속했습니다. 
+	</header>
+	<h1>데이터 전송 연습 페이지</h1>
+	<a href="/">메인 페이지로 이동</a>
+	<pre>
+		데이터 받는 방법 3
+		- 서버에서 보낸 데이터가 문자열이 아닌 경우
+		- 객체
+		- 리스트
+	</pre>
+	
+	<script type="text/javascript">
+	
+	async function getArticle1(url){
+		try{
+			const response = await fetch(url);
+			if(!response.ok){
+				throw new Error("서버 응답 에러 : "+ response.status);
+			}
+			const result = await response.json();
+			console.log(result);
+		}catch(e){
+			console.error("예외발생 : \n"+ e)
+		}
+	}
+	
+	getArticle1("/aritcle/list1");
+	getArticle1("/aritcle/list2");
+	getArticle1("/aritcle/list3");
+	
+	</script>
+
+</body>
+</html>

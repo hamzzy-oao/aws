@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 예제</title>
+    <style>
+        .table{width: 100%;table-layout: fixed; 
+      border-collapse: collapse;}
+    td,th{border-top: 1px solid black; border-bottom: 1px solid black;}
+    .td1:hover,.td2:hover{background: gray;}
+    
+
+    </style>
+</head>
+<body>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="td1">
+                <td>2</td>
+                <td><a href="#" class="Title">게시글입니다.</a></td>
+                <td>admin</td>
+                <td>10</td>
+            </tr>
+             <tr class="td2">
+                <td>1</td>
+                <td><a href="#" class="Title">공지사항입니다.</a></td>
+                <td>admin</td>
+                <td>100</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모패드</title>
+    <style>
+        *{padding: 0; margin: 0; color: black;}
+        ul,ol{list-style: none;}
+        a{text-decoration: none;}
+
+        .container{
+            width: 500px; margin: 0 auto;
+            background-color: rgb(243, 242, 242);
+            padding: 10px 20px;
+        }
+        
+        .input-area{
+            display: flex; margin-bottom: 10px;
+            justify-content: space-between;
+        }
+
+        h1{
+            text-align: center; margin: 10px 0;
+        }
+
+        .input{
+            height: 100px; width: 89%; border-radius: 5px;
+            border: 1px solid rgb(207, 206, 206);  box-sizing: border-box;
+        }
+
+        .add-btn{
+            width: 10%; background-color: rgb(209, 209, 255); color: white;
+            font-weight: bold;
+            border: 1px solid rgb(170, 170, 255); ;border-radius: 5px;
+        }
+
+        .memo-item{
+            margin-bottom: 10px;
+            background-color: white; border-radius: 5px;
+            box-shadow: 0px 0px 2px 0 rgb(207, 206, 206);
+            padding: 10px;
+            display: flex; justify-content: space-between;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>메모패드📝</h1>
+
+        <form class="input-area" id="form">
+            <textarea name="memo" class="input"></textarea>
+            <button class="add-btn">추가</button>
+        </form>
+
+        <ul class="memo-list">
+            <li class="memo-item">
+                <span class="memo">메모입니다.</span>
+                <a href="#" class="del-btn">삭제</a>
+            </li>
+            <li class="memo-item">
+                <span class="memo">메모입니다.</span>
+                <a href="#" class="del-btn">삭제</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+
+<script>
+const form = document.querySelector('#form');
+const memoEl = document.querySelector('[name=memo]');
+
+//form 태그에 submit이벤트 등록
+form.addEventListener('submit', e =>{
+    e.preventDefault();
+    //입력한 메모를 읽어옴
+    let memo = memoEl.value;
+    //메모가 이렵되지 않으면
+    if(memo.trim().length == 0){
+        alert('메모를 입력하세요.');
+        memoEl.value = '';
+        //메모창 활성화
+        memoEl.focus();
+        return;
+    }
+
+    inserMemoToStorage('memos', memo);
+    memoEl.value='';
+
+})
+
+//로컬 스토리지에 있는 메모들을 관리하는 전역 배열
+let memos = loadStorage('memos');
+
+function inserMemoToStorage(storageName,memo){
+    //memos = JSON.pa
+    if(!memos){
+        memos = [];
+        return;
+    }
+    let obj = {
+        memo : memo,
+        id : new date().getTime()
+
+    }
+
+    //추가
+    memo.unshift(obj);
+
+    saveStorage('memos',memos)
+
+    //화면을 재구성
+    displayMemos(memos);
+}
+
+function saveStorage(storageName, obj){
+    localStorage.setItem(storageName, JSON.stringify(obj));
+}
+
+function loadStorage(storageName){
+    let result =  JSON.parse(loadStorage.getTime(storageName));
+    return result ? result : [];
+}
+
+function displayMemos(memos){
+
+    let html = '';
+    memos.forEach(obj =>{
+        html += `
+        <li class="memo=item">
+            <span class="memo">${obj.memo}</span>
+            <a href="#" class="del-btn">삭제</a>
+            </li>
+        `;
+    });
+}
+</script>
+</html>

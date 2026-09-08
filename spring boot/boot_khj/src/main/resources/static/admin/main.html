@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>부트:관리자</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/layout.js"></script>
+</head>
+<body>
+	<app-header></app-header>
+	<div class="container">
+		<br><h1> 관리자 페이지 </h1><br>
+		<div class="board-list">
+			<form class="mb-3 input-group" onsubmit="submitUpdateBoard(event)">
+				<input type="text" name="name" class="form-control " value="공지">
+				<input type="hidden" name="id" class="form-control " value="1">
+				<button class="btn btn-outline-warning">수정</button>
+				<button class="btn btn-outline-danger" type="button" onclick="submitDeleteBoard(1)">삭제</button>
+			</form>
+		</div>
+		<hr>
+		<form class="input-group mb-3" id="boardForm">
+  			<input type="text" name="name" class="form-control" placeholder="게시판을 입력하세요.">
+  			<button class="btn btn-success" type="submit">등록</button>
+		</form>
+	</div>
+	
+	<script>
+	
+	async function submitUpdateBoard(e){
+		e.preventDefault();
+		//form태그 안에 있는 게시판명을 가져옴
+		const formEl = e.target;
+		//form태그 안에 있는 게시판명과 id를 가져와서 객체를 생성
+		const formData = new FormData(formEl);
+    	const data = Object.fromEntries(formData.entries());
+    	
+    	//서버에 data를 전송
+    	//url : /api/admin/board
+    	//method : put
+    	try{
+			const response = await fetch("/api/admin/board",{
+				method : "put",
+				headers : {
+					"Content-Type" : "application/json" 
+				},
+				body: JSON.stringify(data)
+			});
+			
+			if(!response.ok){
+				console.log("정상 종료 아님");
+				return;
+			}
+			const result = await response.text();
+			alert(result);
+		}catch(e){
+			console.log("예외발생 : n",e)
+		}
+    	
+	}
+	
+	async function submitDeleteBoard(id){
+		//id를 객체로 변환
+		const data = {
+				id
+		}
+		//서버로 데이터를 전송
+		//url : /api/admin/board
+		//method : DELETE
+		//보낼 데이터 : data(위에서 만든 객체)
+		try{
+			const response = await fetch("/api/admin/board",{
+				method : "DELETE", 
+				headers : {
+					"Content-Type" : "application/json" 
+				},
+				body: JSON.stringify(data)
+			});
+			
+			if(!response.ok){
+				console.log("정상 종료 아님");
+				return;
+			}
+			const result = await response.text();
+			alert(result);
+			loadBoardList();
+		}catch(e){
+			console.log("에러발생 : n",e)
+		}
+	}
+	
+	async function loadBoardList(){
+		const boardListEl = document.querySelector(".board-list");
+		
+		//서버에 게시판 목록을 요청
+		try{
+			const response = await fetch("/api/admin/board");
+			
+			if(!response.ok){
+				console.log("정상 종료 아님");
+				return;
+			}
+			const result = await response.json();
+			let str = '';
+			result.forEach(board=>{
+				str +=`
+					<form class="mb-3 input-group" onsubmit="submitUpdateBoard(event)">
+						<input type="text" name="name" class="form-control " value="${board.name}">
+						<input type="hidden" name="id" class="form-control " value="${board.id}">
+						<button class="btn btn-outline-warning">수정</button>
+						<button class="btn btn-outline-danger" type="button" onclick="submitDeleteBoard(${board.id})">삭제</button>
+					</form>
+				`
+			});
+			//반복문으로 가져온 게시판 목록을 html 코드로 만들어서 이어 붙임
+			boardListEl.innerHTML = str;
+		}catch(e){
+			console.log("에러발생 : n",e)
+		}
+		
+	}
+	loadBoardList();
+	
+	</script>
+	
+	<script>
+		//form태그를 submit하면 서버로 전송하는 기능을 막고, alert(1)이 실행되도록 작성
+		//1. form태그 요소 선택
+		const formEl = document.querySelector("#boardForm");
+		//2. form태그 요소에 submit 이벤트를 등록
+		formEl.addEventListener("submit", e=>{
+			//3. form태그의 기본 기능을 막음
+			e.preventDefault();
+			//input 태그의 입력된 값을 가져와서 객체로 만듬
+			const formData = new FormData(formEl);
+	    	const data = Object.fromEntries(formData.entries());
+	    	//서버로 data를 post방식으로 전송
+	    	//url : /api/admin/board
+	    	submitBoard(data);
+	    	
+		});
+		
+		async function submitBoard(data){
+			try{
+				const response = await fetch("/api/admin/board",{
+					method : "POST", // 전송 방식 : GET,POST,PUT, DELETE, PATCH
+					headers : {
+						"Content-Type" : "application/json" 
+					},
+					body: JSON.stringify(data)
+				});
+				
+				if(!response.ok){
+					console.log("정상 종료 아님");
+					return;
+				}
+				const result = await response.text();
+				alert(result);
+				loadBoardList();
+			}catch(e){
+				console.log("에러발생 : n",e)
+			}
+		}	
+		
+	</script>
+</body>
+</html>

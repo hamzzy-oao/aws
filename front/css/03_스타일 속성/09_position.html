@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position 예제</title>
+    <style>
+        /* 
+        position(p.145)
+        - 요소를 배치하는 방식을 지정하는 속성
+        - 값 
+        - static : 기본값
+        - fixed : 요소를 브라우저 기준으로 위치를 고정 (위로가기)
+        ㄴ top, bottom, left, right 속성을 이용하여 위치를 조절
+
+        relative
+        - 요소의 상대위치를 기준으로 배치
+        - absolute의 기준 요소가 됨
+        - top, bottom, left, right 속성을 사용할 수 있지만 자주 보이진 않음
+
+        absolute
+            - 기준요소를 기준으로 배치
+            - 기준요소 찾는 방법
+            - absolute가 적용된 요소의 조상 요소 중에서 기준을 찾음
+                1. 조상 요소의 position이 relative이거나 absolute인 조상들을 찾음
+                2. 가장 가까운 조상을 선택함
+                3. 없으면 브라우저를 기준으로 잡음
+            - display 속성이 의미가 없어짐
+            - top, bottom, left, right 속성을 사용함
+            - left, right를 이용하여 너비를 대신할 수 있음(너비가 지정이 안된 경우)
+            - top, bottom를 이용하여 너비를 대신할 수 있음(높이가 지정이 안된 경우)
+
+        
+        */
+        body{height: 2000px;}
+        .btn-pixed{width: 50px;height: 50px;border: 1px solid black; 
+            line-height: 50px; text-align: center;position: fixed;
+            text-decoration: none;background: white; bottom: 0;right: 0;}
+        
+        .box{
+        /* 네모 박스 */
+        width: 100px; height: 100px;
+        /* 검은색 테투리 */
+        border: 3px solid black;
+        /* 한 라인 배치 */
+        display: inline-block;
+        /* 박스 공간 여유 */
+        margin-right: 30px;
+        /* 박스 글자 키우고 가운데 배치 */
+        font-size: 30px; text-align: center; line-height: 100px;
+        /* 배경 흰색으로 지정*/
+        background: white;
+
+        position: relative;}
+
+        .box1{left: 50px;}
+        /* magin-left를 이용하여 box1을 이동시키면 나머지 박스들도 같이 이동됨
+        margin-left 50px;
+        position:relative와 left를 이용하면 box1만 이동하고 나머지 박스들은 그대로 있음
+        */
+        .box2{top: -30px;}
+        .box3{bottom: 30px;}
+        .box4{right: -20px;}
+        .box5{top: 10px; left: 10px;}
+
+        .absolute{border: 3px solid black;
+        position: absolute;
+        left: 0; right: 0;
+        /* 높이 너비 대신 top, bottom, left, right 속성을 사용함 */
+        top: 0; bottom: 0;
+        background-color: yellow;
+        }
+
+        body{
+            /* body에도 relative가 있지만 .absolute는 .container1이 가장 가까운 조상이기 때문에 아래 코드는 영향X */
+            position: absolute;}
+        .container1{
+            /* .absolute의 기준이 되기 위해 relative 지정 */
+            position: relative;}
+
+        
+    </style>
+</head>
+<body>
+    <h1>position 예제</h1>
+    <a href="#" class="btn-pixed">위로</a>
+
+    <div class="container">
+        <h1>relative 예제</h1>
+        <div class="box box1">H</div>
+        <div class="box box2">E</div>
+        <div class="box box3">L</div>
+        <div class="box box4">L</div>
+        <div class="box box5">O</div>
+    </div>
+
+    <div class="container1">
+        <h1>absolute 예제</h1>
+        <div class="absolute">1</div>
+    </div>
+    
+</body>
+</html>

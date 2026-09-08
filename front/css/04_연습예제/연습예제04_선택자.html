@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자</title>
+    <style>
+    .container li:first-of-type{color: red;}
+    .container li:last-of-type{text-decoration:underline;}
+    .container li:nth-last-of-type(2n+1){background-color: yellow;}
+    .container li:nth-of-type(3):hover{font-weight: bold;}   
+    </style>
+</head>
+<body>
+    <h1>선택자 예제</h1>
+    <!-- 1에는 글자가 빨강, 4에는 글자가 밑줄
+     2와 4는 배경이 노랑, 3은 hover하면 글자가 두껍게 되도록 작업 -->
+
+    <div class="container">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+</body>
+</html>

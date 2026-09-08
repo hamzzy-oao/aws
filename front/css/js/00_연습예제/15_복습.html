@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습 예제</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <button>+</button>
+    <div class="box">1</div>
+    <!-- + 버튼을 클릭하면 박스에 숫자가 1씩 증가 하도록 작성하세요. -->
+    <script>
+
+        const 박스 = document.querySelector('.box')
+        const 버튼 = document.querySelector('button')
+        버튼.addEventListener('click',function(){
+            let text = 박스.textContent;
+            let num = parseInt(text);
+            num = num + 1; // ++num;
+
+            박스.textContent = num;
+        });
+
+    </script>
+</body>
+</html>

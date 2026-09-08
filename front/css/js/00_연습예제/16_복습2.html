@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습 예제</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <button class="min">-</button>
+    <span class="box">1</span>
+    <span>/</span>
+    <span>6</span>
+    <button class="max">+</button>
+    <!-- 
+    + 버튼을 클릭
+    박스에 숫자가 1씩 증가 최대 6까지 증가
+    6에서 +를 누르면 1로 수정
+
+    -버튼을 클릭 
+    박스에 숫가자가 1씩 감소
+    최소 1까지 감소
+    1에서 -를 누르면 6으로 수정
+    -->
+    <script>
+
+        const min = document.querySelector('.min')
+        const max = document.querySelector('.max')
+        const 박스 = document.querySelector('.box')
+        min.addEventListener('click',function(){
+            let text = 박스.textContent;
+            let num = parseInt(text);
+            num = num - 1; // ++num;
+            if (num < 1) {
+            num = 6;
+        }
+
+            박스.textContent = num;
+        });
+
+        max.addEventListener('click',function(){
+            let text = 박스.textContent;
+            let num = parseInt(text);
+            num = num + 1; 
+
+            if (num > 6) {
+             num = 1;
+        }
+
+            박스.textContent = num;
+        });
+
+    </script>
+</body>
+</html>
