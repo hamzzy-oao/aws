@@ -53,7 +53,7 @@ public class PostController {
 			@Parameter(description = "검색어")
 			@RequestParam(required = false, defaultValue = "", name ="keyword" )String keyword,
 			@Parameter(description = "정렬 방법")
-			@PageableDefault(size=10, sort="id", direction = Sort.Direction.DESC)
+			@PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC)
 				Pageable pageble){
 		PageResponse<Post> pageResponse = postService.getPosts(type, keyword, pageble);
 		return ResponseEntity.ok(pageResponse);
