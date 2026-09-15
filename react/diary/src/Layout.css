@@ -1,0 +1,140 @@
+.diary-navbar {
+  min-height: 82px;
+  padding: 12px 0;
+  background-color: #fffaf2;
+  border-bottom: 1px solid #eadfd2;
+  box-shadow: 0 3px 14px rgba(105, 83, 67, 0.08);
+}
+
+.diary-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #5c493d;
+  text-decoration: none;
+}
+
+.diary-brand:hover,
+.diary-brand:focus {
+  color: #5c493d;
+}
+
+.diary-brand-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  background-color: #f3dfcf;
+  font-size: 24px;
+}
+
+.diary-brand strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  letter-spacing: -0.5px;
+}
+
+.diary-brand small {
+  display: block;
+  margin-top: 2px;
+  color: #a08c7c;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.diary-menu {
+  align-items: center;
+  gap: 7px;
+}
+
+.diary-nav-link {
+  padding: 9px 14px !important;
+  border-radius: 10px;
+  color: #69584d !important;
+  font-size: 15px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.diary-nav-link:hover {
+  color: #bd765d !important;
+  background-color: #f9eadf;
+  transform: translateY(-1px);
+}
+
+.diary-nav-link.active {
+  color: #a95f49 !important;
+  background-color: #f4ddd0;
+}
+.diary-navbar .diary-signup-link {
+  margin-left: 5px;
+  padding: 9px 18px !important;
+  border: 1px solid #d89a82;
+  border-radius: 12px;
+  color: #6b4032 !important;
+  background-color: #f3cdbd !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(190, 113, 87, 0.18);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.diary-navbar .diary-signup-link:hover {
+  color: #ffffff !important;
+  background-color: #bd765d !important;
+  transform: translateY(-1px);
+}
+
+.diary-navbar .diary-signup-link.active {
+  color: #ffffff !important;
+  background-color: #a9614b !important;
+}
+
+.diary-signup-link:hover,
+.diary-signup-link.active {
+  color: #ffffff !important;
+  background-color: #b96f57;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 13px rgba(190, 113, 87, 0.25);
+}
+
+.diary-toggle {
+  border-color: #eea673 !important;
+  box-shadow: none !important;
+}
+
+.diary-toggle:focus {
+  box-shadow: 0 0 0 3px rgba(207, 135, 109, 0.17) !important;
+}
+
+@media (max-width: 991px) {
+  .diary-navbar {
+    min-height: auto;
+  }
+
+  .diary-menu {
+    align-items: stretch;
+    gap: 4px;
+    padding: 16px 0 5px;
+  }
+
+  .diary-nav-link {
+    padding: 11px 13px !important;
+  }
+
+  .diary-signup-link {
+    margin-top: 5px;
+    margin-left: 0;
+    text-align: center;
+  }
+}

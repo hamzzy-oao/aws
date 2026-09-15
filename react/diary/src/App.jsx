@@ -1,9 +1,6 @@
 import {BrowserRouter} from "react-router-dom";
-import { Header, Footer } from "./Layout";
+import { Header } from "./Layout";
 import Main from "./Main";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 
 function App() {
@@ -11,7 +8,6 @@ function App() {
     <BrowserRouter>
       <Header />
       <Main />
-      <Footer />
     </BrowserRouter>
   );
 }

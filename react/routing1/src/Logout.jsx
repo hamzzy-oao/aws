@@ -1,5 +1,3 @@
-
-
 function Logout() {
     return(
         <div>
