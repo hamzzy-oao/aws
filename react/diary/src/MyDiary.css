@@ -1,0 +1,181 @@
+.diary-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 20px;
+
+    background:
+        linear-gradient(
+            rgba(255, 250, 244, 0.9),
+            rgba(250, 239, 226, 0.94)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 31px,
+            rgba(177, 128, 94, 0.08) 32px
+        );
+}
+
+.diary-card.container {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 42px 46px;
+
+    background-color: #fffdf9;
+    border: 1px solid #ead8c8;
+    border-radius: 22px;
+
+    box-shadow: 0 12px 35px rgba(91, 61, 43, 0.13);
+}
+
+.diary-title {
+    margin: 0 0 34px;
+
+    color: #513629;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-align: center;
+}
+
+.diary-form .diary-field {
+    margin-bottom: 22px;
+}
+
+.diary-form label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #624638;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 일반 입력창 */
+.diary-form input:not([type="checkbox"]),
+.diary-form select,
+.diary-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+
+    color: #493229;
+    background-color: #fffaf5;
+
+    border: 1px solid #dfcbbb;
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.diary-form input:not([type="checkbox"]),
+.diary-form select {
+    height: 50px;
+}
+
+.diary-form textarea {
+    min-height: 240px;
+    line-height: 1.7;
+    resize: vertical;
+}
+
+.diary-form input:not([type="checkbox"])::placeholder,
+.diary-form textarea::placeholder {
+    color: #bca99e;
+}
+
+.diary-form input:not([type="checkbox"]):focus,
+.diary-form select:focus,
+.diary-form textarea:focus {
+    background-color: #ffffff;
+    border-color: #b86444;
+    box-shadow: 0 0 0 4px rgba(184, 100, 68, 0.14);
+    outline: none;
+}
+
+/* 공개 여부 체크박스 */
+.diary-form .public-check {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.diary-form .public-check input[type="checkbox"] {
+    appearance: auto !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    accent-color: #b86444;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.diary-form .public-check span {
+    color: #624638;
+    font-size: 14px;
+}
+
+/* 저장 버튼 */
+.diary-card .diary-submit.btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 8px;
+
+    color: #ffffff;
+    background-color: #b86444;
+
+    border: 1px solid #b86444;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.diary-card .diary-submit.btn:hover {
+    color: #ffffff;
+    background-color: #9f4f34;
+    border-color: #9f4f34;
+
+    transform: translateY(-1px);
+    box-shadow: 0 7px 16px rgba(159, 79, 52, 0.24);
+}
+
+.diary-card .diary-submit.btn:active {
+    color: #ffffff;
+    background-color: #87422c;
+    border-color: #87422c;
+
+    transform: translateY(0);
+}
+
+/* 모바일 화면 */
+@media (max-width: 576px) {
+    .diary-page {
+        padding: 35px 15px;
+    }
+
+    .diary-card.container {
+        padding: 32px 24px;
+        border-radius: 17px;
+    }
+
+    .diary-title {
+        font-size: 26px;
+    }
+}

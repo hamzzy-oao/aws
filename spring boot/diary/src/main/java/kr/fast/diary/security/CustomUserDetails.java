@@ -1,4 +1,4 @@
-package kr.fast.community.security;
+package kr.fast.diary.security;
 
 import java.util.Collection;
 
@@ -17,13 +17,12 @@ public class CustomUserDetails implements UserDetails {
 	
 	private final Long userId;
 	private final String email;
-	private final String nickname;
-	private final Collection<? extends GrantedAuthority> authorities;
-	
+	private final String nickName;
+	private final Collection<? extends GrantedAuthority> authrities;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+		return authrities;
 	}
 
 	@Override
@@ -31,9 +30,11 @@ public class CustomUserDetails implements UserDetails {
 		return null;
 	}
 
+
 	@Override
 	public String getUsername() {
-		return email;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

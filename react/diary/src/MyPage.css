@@ -1,0 +1,435 @@
+.mypage-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 20px;
+
+    background:
+        linear-gradient(
+            rgba(255, 250, 244, 0.9),
+            rgba(250, 239, 226, 0.94)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 31px,
+            rgba(177, 128, 94, 0.08) 32px
+        );
+}
+
+.mypage-card {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 42px 46px;
+
+    background-color: #fffdf9;
+    border: 1px solid #ead8c8;
+    border-radius: 22px;
+
+    box-shadow: 0 12px 35px rgba(91, 61, 43, 0.13);
+}
+
+.mypage-title-area {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.mypage-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 58px;
+    height: 58px;
+    margin-bottom: 14px;
+
+    background-color: #f6e3d4;
+    border-radius: 18px;
+
+    font-size: 28px;
+}
+
+.mypage-title-area h1 {
+    margin: 0 0 10px;
+
+    color: #513629;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.mypage-title-area p {
+    margin: 0;
+
+    color: #9a7765;
+    font-size: 14px;
+}
+
+.mypage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.mypage-diary-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-height: 92px;
+    padding: 18px 48px 18px 20px;
+
+    background-color: #fffaf5;
+    border: 1px solid #ead8c8;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease,
+        background-color 0.2s ease;
+}
+
+.mypage-diary-item:hover {
+    background-color: #ffffff;
+    border-color: #c98b70;
+
+    transform: translateY(-2px);
+    box-shadow: 0 7px 17px rgba(91, 61, 43, 0.12);
+}
+
+.mypage-diary-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.mypage-diary-date {
+    display: block;
+    margin-bottom: 6px;
+
+    color: #a47c68;
+    font-size: 13px;
+}
+
+.mypage-diary-title {
+    overflow: hidden;
+
+    margin: 0;
+
+    color: #513629;
+    font-size: 18px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mypage-emotions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+
+    max-width: 220px;
+}
+
+.mypage-emotion-tag {
+    padding: 5px 10px;
+
+    color: #8a5038;
+    background-color: #f7e5d7;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mypage-arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+
+    color: #b86444;
+    font-size: 28px;
+
+    transform: translateY(-50%);
+}
+
+.mypage-empty {
+    padding: 55px 20px;
+
+    color: #9a7765;
+    background-color: #fffaf5;
+    border: 1px dashed #dfcbbb;
+    border-radius: 14px;
+
+    text-align: center;
+    font-size: 15px;
+}
+
+.mypage-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    margin-top: 32px;
+}
+
+.mypage-pagination span {
+    min-width: 70px;
+
+    color: #624638;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mypage-pagination button {
+    min-width: 76px;
+    height: 40px;
+
+    color: #ffffff;
+    background-color: #b86444;
+    border: 1px solid #b86444;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.mypage-pagination button:hover:not(:disabled) {
+    background-color: #9f4f34;
+    transform: translateY(-1px);
+}
+
+.mypage-pagination button:disabled {
+    color: #bba99f;
+    background-color: #eee4dc;
+    border-color: #e1d3c8;
+    cursor: not-allowed;
+}
+
+@media (max-width: 576px) {
+    .mypage-page {
+        padding: 35px 15px;
+    }
+
+    .mypage-card {
+        padding: 32px 20px;
+        border-radius: 17px;
+    }
+
+    .mypage-title-area h1 {
+        font-size: 26px;
+    }
+
+    .mypage-diary-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+
+        padding: 17px 42px 17px 17px;
+    }
+
+    .mypage-emotions {
+        justify-content: flex-start;
+        max-width: 100%;
+    }
+}
+
+/* 캘린더 영역 */
+.calendar-area {
+    width: 100%;
+    margin: 32px auto 42px;
+    padding: 22px;
+
+    background-color: #fffaf5;
+    border: 1px solid #ead8c8;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 22px rgba(91, 61, 43, 0.08);
+}
+
+/* 캘린더 전체 */
+.diary-calendar.react-calendar {
+    width: 100%;
+    max-width: none;
+
+    color: #513629;
+    background-color: transparent;
+    border: none;
+
+    font-family: inherit;
+}
+
+/* 상단 월 이동 영역 */
+.diary-calendar .react-calendar__navigation {
+    display: flex;
+    align-items: center;
+
+    height: 52px;
+    margin-bottom: 18px;
+}
+
+.diary-calendar .react-calendar__navigation button {
+    min-width: 44px;
+
+    color: #624638;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.diary-calendar .react-calendar__navigation__label {
+    font-size: 18px !important;
+}
+
+.diary-calendar .react-calendar__navigation button:enabled:hover,
+.diary-calendar .react-calendar__navigation button:enabled:focus {
+    color: #ffffff;
+    background-color: #b86444;
+}
+
+/* 요일 */
+.diary-calendar .react-calendar__month-view__weekdays {
+    margin-bottom: 8px;
+
+    color: #8f6a57;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.diary-calendar
+.react-calendar__month-view__weekdays__weekday {
+    padding: 10px 0;
+}
+
+.diary-calendar
+.react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none;
+}
+
+/* 날짜 칸 */
+.diary-calendar .react-calendar__tile {
+    position: relative;
+
+    height: 70px;
+    padding: 12px 6px;
+
+    color: #513629;
+    background-color: transparent;
+    border: 3px solid transparent;
+    border-radius: 12px;
+
+    font-size: 14px;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+/* 날짜 hover */
+.diary-calendar .react-calendar__tile:enabled:hover,
+.diary-calendar .react-calendar__tile:enabled:focus {
+    background-color: #f7e5d7;
+    transform: translateY(-1px);
+}
+
+/* 오늘 */
+.diary-calendar .react-calendar__tile--now {
+    color: #9f4f34;
+    background-color: #fff0e5;
+    border-color: #e9bda8;
+    font-weight: 700;
+}
+
+/* 선택한 날짜 */
+.diary-calendar .react-calendar__tile--active {
+    color: #ffffff;
+    background-color: #b86444;
+    border-color: #b86444;
+}
+
+.diary-calendar .react-calendar__tile--active:enabled:hover,
+.diary-calendar .react-calendar__tile--active:enabled:focus {
+    color: #ffffff;
+    background-color: #9f4f34;
+}
+
+/* 다른 달 날짜 */
+.diary-calendar
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: #c7b7ae;
+}
+
+/* 일요일 */
+.diary-calendar
+.react-calendar__month-view__days
+.react-calendar__tile:nth-child(7n + 1) {
+    color: #c35c55;
+}
+
+/* 토요일 */
+.diary-calendar
+.react-calendar__month-view__days
+.react-calendar__tile:nth-child(7n) {
+    color: #54749a;
+}
+
+/* 일기가 있는 날짜 */
+.diary-calendar .calendar-has-diary {
+    background-color: #fff4ec;
+    border-color: #efd1bf;
+    font-weight: 700;
+}
+
+/* 일기 아이콘 */
+.calendar-diary-icon {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+    font-size: 15px;
+    line-height: 1;
+}
+
+/* 모바일 */
+@media (max-width: 576px) {
+    .calendar-area {
+        margin: 25px auto 32px;
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .diary-calendar .react-calendar__tile {
+        height: 55px;
+        padding: 8px 2px;
+        font-size: 12px;
+    }
+
+    .diary-calendar .react-calendar__navigation__label {
+        font-size: 15px !important;
+    }
+
+    .calendar-diary-icon {
+        right: 3px;
+        bottom: 4px;
+        font-size: 12px;
+    }
+}

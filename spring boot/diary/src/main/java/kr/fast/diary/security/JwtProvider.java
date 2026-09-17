@@ -24,13 +24,15 @@ public class JwtProvider{
         this.expiration = expiration;
     }
 
-    public String createToken(String username, String role){
+    public String createToken(String email, String nickname,Long userId, String role){
         Date now = new Date();
         Date validity = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
-                .subject(username)
+                .subject(email)
                 .claim("role", role)
+                .claim("nickname", nickname)
+                .claim("userId", userId)
                 .issuedAt(now)
                 .expiration(validity)
                 .signWith(key)
@@ -52,6 +54,9 @@ public class JwtProvider{
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
+        
+        
+        
     }
 
     private Claims parseClaims(String token){
@@ -61,4 +66,9 @@ public class JwtProvider{
                 .parseSignedClaims(token)
                 .getPayload();
     }
+    
+    public Object get(String token, String claim, Class<? extends Object> requiredType) {
+    	return parseClaims(token).get(claim, requiredType);
+    }
+
 }
