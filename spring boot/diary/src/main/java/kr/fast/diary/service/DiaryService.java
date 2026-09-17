@@ -1,5 +1,6 @@
 package kr.fast.diary.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,9 @@ import kr.fast.diary.dto.DiaryCreateResponse;
 import kr.fast.diary.dto.DiaryDetailResponse;
 import kr.fast.diary.dto.DiaryListResponse;
 import kr.fast.diary.dto.DiaryRequest;
+import kr.fast.diary.dto.DiaryStatResponse;
+import kr.fast.diary.dto.EmotionStatResponse;
+import kr.fast.diary.dto.MonthlyCountResponse;
 import kr.fast.diary.entity.EmotionTag;
 import kr.fast.diary.entity.Post;
 import kr.fast.diary.repository.DiaryRepository;
@@ -61,9 +65,11 @@ public class DiaryService {
         	throw new IllegalArgumentException("본문을 입력해주세요.");
 		}
 		
-		if (request.emotionTagId() == null) {
+		if (request.emotionTagIds() == null) {
 			throw new IllegalArgumentException("감정태그를 선택해주세요.");
 		}
+		
+		
 		
 		String imageUrl = null;
 		
@@ -90,11 +96,13 @@ public class DiaryService {
 		        Boolean.TRUE.equals(request.isPublic())
 		);
 		
-		EmotionTag emotionTag = emojiRepository.findById(request.emotionTagId())
-		        .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 감정태그입니다."));
+		for (Long tagId : request.emotionTagIds()) {
+		    EmotionTag emotionTag = emojiRepository.findById(tagId)
+		            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 감정태그입니다."));
+		    
+		    diary.addEmotionTag(emotionTag);
+		}
 
-		diary.addEmotionTag(emotionTag);
-		
 		
 		 Post savedDiary = diaryRepository.save(diary);
 		
@@ -142,11 +150,14 @@ public class DiaryService {
 	    post.update(request.title(), request.content(), request.diaryDate(),
 	            Boolean.TRUE.equals(request.isPublic()), imageUrl);
 
-	    if (request.emotionTagId() != null) {
-	        EmotionTag emotionTag = emojiRepository.findById(request.emotionTagId())
-	                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 감정태그입니다."));
+	    if (request.emotionTagIds() != null && !request.emotionTagIds().isEmpty()) {
 	        post.getEmotionTags().clear();
-	        post.addEmotionTag(emotionTag);
+
+	        for (Long tagId : request.emotionTagIds()) {
+	            EmotionTag emotionTag = emojiRepository.findById(tagId)
+	                    .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 감정태그입니다."));
+	            post.addEmotionTag(emotionTag);
+	        }
 	    }
 	}
 
@@ -160,6 +171,29 @@ public class DiaryService {
 	    }
 
 	    diaryRepository.delete(post);
+	}
+	
+	@Transactional
+	public Page<DiaryListResponse> getFeed(CustomUserDetails userDetails, String keyword,
+	        LocalDate date, Long emotionTagId, Pageable pageable) {
+	    return diaryRepository.searchFeed(
+	            userDetails.getUserId(), keyword, date, emotionTagId, pageable
+	    ).map(DiaryListResponse::from);
+	}
+	
+	@Transactional
+	public DiaryStatResponse getStats(CustomUserDetails userDetails, int year) {
+	    List<Object[]> emotionRows = diaryRepository.countEmotionByYear(userDetails.getUserId(), year);
+	    List<EmotionStatResponse> emotionStats = emotionRows.stream()
+	            .map(row -> new EmotionStatResponse((String) row[0], (Long) row[1]))
+	            .toList();
+
+	    List<Object[]> monthRows = diaryRepository.countByMonth(userDetails.getUserId(), year);
+	    List<MonthlyCountResponse> monthlyStats = monthRows.stream()
+	            .map(row -> new MonthlyCountResponse((Integer) row[0], (Long) row[1]))
+	            .toList();
+
+	    return new DiaryStatResponse(emotionStats, monthlyStats);
 	}
 
 

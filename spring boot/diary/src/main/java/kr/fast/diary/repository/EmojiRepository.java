@@ -11,6 +11,8 @@ public interface EmojiRepository extends JpaRepository<EmotionTag, String> {
 
 	List<EmotionTag> findAllByOrderByDisplayOrderAsc();
 
-	Optional<EmotionTag> findById(Long emotionTagId);
+	Optional<EmotionTag> findById(Long tagId);
+
+	List<EmotionTag> findAllByIdIn(List<Long> emotionTagIds);
 
 }

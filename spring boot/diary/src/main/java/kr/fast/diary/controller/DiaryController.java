@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +32,7 @@ import kr.fast.diary.dto.DiaryCreateResponse;
 import kr.fast.diary.dto.DiaryDetailResponse;
 import kr.fast.diary.dto.DiaryListResponse;
 import kr.fast.diary.dto.DiaryRequest;
+import kr.fast.diary.dto.DiaryStatResponse;
 import kr.fast.diary.entity.EmotionTag;
 import kr.fast.diary.security.CustomUserDetails;
 import kr.fast.diary.service.DiaryService;
@@ -97,26 +98,38 @@ public class DiaryController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> updateDiary(
+	public ResponseEntity<DiaryCreateResponse> updateDiary(
 	        @PathVariable("id") Long id,
 	        @RequestPart("request") DiaryRequest request,
 	        @AuthenticationPrincipal CustomUserDetails userDetails,
 	        @RequestPart(value = "files", required = false) List<MultipartFile> files) {
 	    diaryService.updateDiary(id, request, userDetails, files);
-	    return ResponseEntity.ok().build();
+	    return ResponseEntity.ok(new DiaryCreateResponse(true, "일기가 수정되었습니다.", id));
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteDiary(
-	        @PathVariable("id") Long id,
-	        @AuthenticationPrincipal CustomUserDetails userDetails) {
-	    diaryService.deleteDiary(id, userDetails);
-	    return ResponseEntity.ok().build();
-	}
+	    
 	
 	@GetMapping("/my/all")
 	public ResponseEntity<List<DiaryListResponse>> getAllMyDiaries(
 	        @AuthenticationPrincipal CustomUserDetails userDetails) {
 	    return ResponseEntity.ok(diaryService.getMyDiaries(userDetails));
+	}
+	
+	@GetMapping("/feed")
+	public ResponseEntity<Page<DiaryListResponse>> getFeed(
+	        @AuthenticationPrincipal CustomUserDetails userDetails,
+	        @RequestParam(value = "keyword", required = false) String keyword,
+	        @RequestParam(value = "date", required = false) LocalDate date,
+	        @RequestParam(value = "emotionTagId", required = false) Long emotionTagId,
+	        @PageableDefault(size = 10, sort = "diaryDate", direction = Sort.Direction.DESC) Pageable pageable) {
+	    return ResponseEntity.ok(diaryService.getFeed(userDetails, keyword, date, emotionTagId, pageable));
+	}
+	
+	@GetMapping("/stats")
+	public ResponseEntity<DiaryStatResponse> getStats(
+	        @AuthenticationPrincipal CustomUserDetails userDetails,
+	        @RequestParam(value = "year", required = false) Integer year) {
+	    int targetYear = (year != null) ? year : java.time.Year.now().getValue();
+	    return ResponseEntity.ok(diaryService.getStats(userDetails, targetYear));
 	}
 }

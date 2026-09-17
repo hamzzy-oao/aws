@@ -24,7 +24,7 @@ public class EmotionTag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "emotion_tag_id")
-	private String id;
+	private Long id;
 	
 	
 	private String name;

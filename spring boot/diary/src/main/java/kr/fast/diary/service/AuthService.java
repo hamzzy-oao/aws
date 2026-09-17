@@ -1,16 +1,25 @@
 package kr.fast.diary.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.fast.diary.security.JwtProvider;
+import kr.fast.diary.dto.CommentRequest;
+import kr.fast.diary.dto.CommentResponse;
 import kr.fast.diary.dto.LoginRequest;
 import kr.fast.diary.dto.LoginResponse;
 import kr.fast.diary.dto.MessageResponse;
 import kr.fast.diary.dto.SignupRequest;
+import kr.fast.diary.entity.Comment;
 import kr.fast.diary.entity.Member;
+import kr.fast.diary.entity.Post;
+import kr.fast.diary.repository.CommentRepository;
+import kr.fast.diary.repository.DiaryRepository;
 import kr.fast.diary.repository.MemberRepository;
+import kr.fast.diary.security.CustomUserDetails;
+import kr.fast.diary.security.JwtProvider;
 import lombok.AllArgsConstructor;
 
 
@@ -22,6 +31,8 @@ public class AuthService {
 	private final BCryptPasswordEncoder encoder;
 	private final MemberRepository memberRepository;
 	private final JwtProvider jwtProvider;
+	
+	
 	
 	@Transactional
 	public MessageResponse signup(SignupRequest request) {
@@ -102,6 +113,7 @@ public class AuthService {
 		//사원증 리턴
 		return new LoginResponse(true,"로그인되었습니다.",accessToken,user.getNickname());
 	}
+	
 
 	
 	

@@ -4,29 +4,32 @@ import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from "react";
 import{ useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { useSearchParams } from "react-router-dom";
 
-import "./MyDiary.css";
+import "./CSS/MyDiary.css";
 
 function MyDiary() {
     
     const inputHandler = (e) => {
     const { name, value, type, checked } = e.target;
-
+    
     setData(previousData => ({
         ...previousData,
         [name]: type === "checkbox" ? checked : value
     }));
 };
 
+    const [searchParams] = useSearchParams();
+    const dateFromCalendar = searchParams.get("date");
     const navigate = useNavigate();
     const { accessToken } = useAuth();
     const [emotionTags, setEmotionTags] = useState([]);
     const [image, setImage] = useState(null);
     const [data, setData] = useState({
-        diaryDate : '',
+        diaryDate : dateFromCalendar || '',
         title : '',
         content : '',
-        emotionTagId: '',
+        emotionTagIds: [],
         isPublic: ''
 
     });
@@ -121,6 +124,15 @@ function MyDiary() {
 
 
     },[accessToken]);
+
+    const emotionTagHandler = (tagId) => {
+    setData(prev => ({
+        ...prev,
+        emotionTagIds: prev.emotionTagIds.includes(tagId)
+            ? prev.emotionTagIds.filter(id => id !== tagId)
+            : [...prev.emotionTagIds, tagId]
+    }));
+};
     
     return(
             <div className="diary-page">
@@ -131,21 +143,24 @@ function MyDiary() {
                         <div className="diary-field">
                             <label htmlFor="diaryDate">날짜</label>
                             <input type="date" id="diaryDate" name="diaryDate"
+                                value={data.diaryDate}
                                 onChange={inputHandler} />
                         </div>
 
                         <div className="diary-field">
-                            <label htmlFor="emotionTagId">감정 태그</label>
-                            <select id="emotionTagId" name="emotionTagId"
-                            value={data.emotionTagId} onChange={inputHandler}>
-                            <option value="">감정 태그를 선택하세요.</option>
-
-                            {emotionTags.map((emotionTag) => (
-                                <option key={emotionTag.id} value={emotionTag.id}>
-                                    {emotionTag.emoji} {emotionTag.name}
-                                </option>
-                            ))}
-                            </select>
+                            <label>감정 태그 (여러 개 선택 가능)</label>
+                            <div className="emotion-tag-list">
+                                {emotionTags.map(tag => (
+                                    <button
+                                        type="button"
+                                        key={tag.id}
+                                        className={data.emotionTagIds.includes(tag.id) ? "selected" : ""}
+                                        onClick={() => emotionTagHandler(tag.id)}
+                                    >
+                                        {tag.emoji} {tag.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="diary-field">

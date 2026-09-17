@@ -94,7 +94,7 @@ public class Post {
         this.emotionTags.add(emotionTag);
     }
 
-    public void update(String title, String content, LocalDate diaryDate, Boolean isPublic, String imageUrl) {
+    public void update(String title, String content, LocalDate diaryDate, boolean isPublic, String imageUrl) {
         this.title = title;
         this.content = content;
         this.diaryDate = diaryDate;

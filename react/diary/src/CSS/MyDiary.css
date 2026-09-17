@@ -179,3 +179,82 @@
         font-size: 26px;
     }
 }
+.diary-field:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 감정 태그 목록 */
+.emotion-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-top: 10px;
+}
+
+/* 기본 감정 태그 버튼 */
+.emotion-tag-list button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    min-height: 38px;
+    padding: 7px 13px;
+
+    color: #624638;
+    background-color: #fffaf5;
+    border: 1px solid #dfcbbb;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.emotion-tag-list button:hover {
+    color: #9f4f34;
+    background-color: #fceee4;
+    border-color: #c98b70;
+
+    transform: translateY(-1px);
+}
+
+/* 선택된 감정 태그 */
+.emotion-tag-list button.selected {
+    color: #ffffff;
+    background-color: #b86444;
+    border-color: #b86444;
+
+    box-shadow: 0 4px 10px rgba(184, 100, 68, 0.22);
+}
+
+.emotion-tag-list button.selected:hover {
+    color: #ffffff;
+    background-color: #9f4f34;
+    border-color: #9f4f34;
+}
+
+.emotion-tag-list button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(184, 100, 68, 0.16);
+}
+
+@media (max-width: 576px) {
+    .emotion-tag-list {
+        gap: 7px;
+    }
+
+    .emotion-tag-list button {
+        padding: 6px 11px;
+        font-size: 12px;
+    }
+}

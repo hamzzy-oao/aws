@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useAuth } from "./AuthContext";
 
-import "./Layout.css";
+import "./CSS/Layout.css";
 
 function Header() {
 
@@ -51,6 +51,17 @@ function Header() {
                     <>
                         <Nav.Link
                             as={NavLink}
+                            to="/diaries"
+                            className="diary-nav-link"
+                        >
+                            일기 목록
+                        </Nav.Link>
+
+
+
+
+                        <Nav.Link
+                            as={NavLink}
                             to="/mydiary"
                             className="diary-nav-link"
                         >
@@ -76,6 +87,16 @@ function Header() {
                     </>
                 ) : (
                     <>
+                        <Nav.Link
+                            as={NavLink}
+                            to="/diaries"
+                            className="diary-nav-link"
+                        >
+                            일기 목록
+                        </Nav.Link>
+                        
+                        
+                        
                         <Nav.Link
                             as={NavLink}
                             to="/login"

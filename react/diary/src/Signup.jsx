@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
-import "./Signup.css";
+import "./CSS/Signup.css";
 
 
 function Signup() {

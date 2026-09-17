@@ -15,7 +15,7 @@ function DiaryEdit() {
         diaryDate: '',
         title: '',
         content: '',
-        emotionTagId: '',
+        emotionTagIds: [],
         isPublic: false
     });
 
@@ -38,24 +38,22 @@ function DiaryEdit() {
                 diaryDate: result.diaryDate,
                 title: result.title,
                 content: result.content,
-                emotionTagId: result.emotionTagId ?? '',
+                emotionTagIds: result.emotionTagIds ?? '',
                 isPublic: result.isPublic
             });
         };
         if (accessToken) fetchDiary();
     }, [accessToken, id]);
 
-    // 감정태그 목록 불러오기
     useEffect(() => {
         const getEmotionTags = async () => {
-            if (!accessToken) return;
             const response = await fetch("/api/diary/emotion", {
                 headers: { Authorization: `Bearer ${accessToken}` }
             });
             const result = await response.json();
             setEmotionTags(result);
         };
-        getEmotionTags();
+        if (accessToken) getEmotionTags();
     }, [accessToken]);
 
     const imageHandler = (e) => {
@@ -67,6 +65,15 @@ function DiaryEdit() {
             return;
         }
         setImage(selectedImage || null);
+    };
+
+    const emotionTagHandler = (tagId) => {
+        setData(prev => ({
+            ...prev,
+            emotionTagIds: prev.emotionTagIds.includes(tagId)
+                ? prev.emotionTagIds.filter(id => id !== tagId)
+                : [...prev.emotionTagIds, tagId]
+        }));
     };
 
     const submitHander = async (e) => {
@@ -102,16 +109,19 @@ function DiaryEdit() {
                     </div>
 
                     <div className="diary-field">
-                        <label htmlFor="emotionTagId">감정 태그</label>
-                        <select id="emotionTagId" name="emotionTagId"
-                            value={data.emotionTagId} onChange={inputHandler}>
-                            <option value="">감정 태그를 선택하세요.</option>
-                            {emotionTags.map((tag) => (
-                                <option key={tag.id} value={tag.id}>
+                        <label>감정 태그 (여러 개 선택 가능)</label>
+                        <div className="emotion-tag-list">
+                            {emotionTags.map(tag => (
+                                <button
+                                    type="button"
+                                    key={tag.id}
+                                    className={data.emotionTagIds.includes(tag.id) ? "selected" : ""}
+                                    onClick={() => emotionTagHandler(tag.id)}
+                                >
                                     {tag.emoji} {tag.name}
-                                </option>
+                                </button>
                             ))}
-                        </select>
+                        </div>
                     </div>
 
                     <div className="diary-field">

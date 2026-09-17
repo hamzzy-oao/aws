@@ -5,6 +5,9 @@ import MyDiary from "./MyDiary";
 import { DiaryCalendar, MyPage } from "./MyPage";
 import DiaryDetail from "./DiaryDetail";
 import DiaryEdit from "./DiaryEdit";
+import Diaries from "./Diaries";
+import Statistics from "./Statistics";
+
 
 
 import { Route, Routes } from "react-router-dom";
@@ -20,6 +23,8 @@ function Main() {
             <Route path="/calendar" element={<DiaryCalendar />} />
             <Route path="/diary/:id" element={<DiaryDetail />} />
             <Route path="/diary/edit/:id" element={<DiaryEdit />} />
+            <Route path="/diaries" element={<Diaries />} />
+            <Route path="/stats" element={<Statistics />} />
 
         </Routes>
     )

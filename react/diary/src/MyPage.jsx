@@ -4,12 +4,15 @@ import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import Calendar from 'react-calendar';
 
-import "./MyPage.css";
+
+import "./CSS/MyPage.css";
 
 function DiaryCalendar() {
     const { accessToken } = useAuth();
     const navigate = useNavigate();
+    const [activeDate, setActiveDate] = useState(new Date());
     const [diaries, setDiaries] = useState([]);
+    
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -23,51 +26,63 @@ function DiaryCalendar() {
     }, [accessToken]);
 
     const getDiaryByDate = (date) => {
-        const dateStr = date.toISOString().split("T")[0];
-        return diaries.find(d => d.diaryDate === dateStr);
-    };
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+    return diaries.find(d => d.diaryDate === dateStr);
+};
 
     return (
         <div className="calendar-area">
+            <button
+                type="button"
+                className="calendar-today-button"
+                onClick={() => setActiveDate(new Date())}
+            >
+                오늘
+            </button>
+
             <Calendar
-            className="diary-calendar"
-            locale="ko-KR"
-            calendarType="gregory"
-            formatDay={(locale, date) => date.getDate()}
-            prev2Label="«"
-            next2Label="»"
-            prevLabel="‹"
-            nextLabel="›"
+                className="diary-calendar"
+                locale="ko-KR"
+                calendarType="gregory"
+                formatDay={(locale, date) => date.getDate()}
+                prev2Label="«"
+                next2Label="»"
+                prevLabel="‹"
+                nextLabel="›"
+                activeStartDate={activeDate}
+                onActiveStartDateChange={({ activeStartDate }) => setActiveDate(activeStartDate)}
 
-            tileClassName={({ date, view }) => {
-                if (
-                    view === "month" &&
-                    getDiaryByDate(date)
-                ) {
-                    return "calendar-has-diary";
-                }
+                tileClassName={({ date, view }) => {
+                    if (view === "month" && getDiaryByDate(date)) {
+                        return "calendar-has-diary";
+                    }
+                    return null;
+                }}
 
-                return null;
-            }}
+                tileContent={({ date, view }) => {
+                    const diary = getDiaryByDate(date);
+                    return view === "month" && diary ? (
+                        <span className="calendar-diary-icon">📝</span>
+                    ) : null;
+                }}
 
-            tileContent={({ date, view }) => {
-                const diary = getDiaryByDate(date);
+                onClickDay={(date) => {
+                    const diary = getDiaryByDate(date);
 
-                return view === "month" && diary ? (
-                    <span className="calendar-diary-icon">
-                        📝
-                    </span>
-                ) : null;
-            }}
-
-            onClickDay={(date) => {
-                const diary = getDiaryByDate(date);
-
-                if (diary) {
-                    navigate(`/diary/${diary.id}`);
-                }
-            }}
-        />
+                    if (diary) {
+                        navigate(`/diary/${diary.id}`);
+                    } else {
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const dateStr = `${year}-${month}-${day}`;
+                        navigate(`/mydiary?date=${dateStr}`);
+                    }
+                }}
+            />
         </div>
     );
 }
@@ -123,11 +138,15 @@ function MyPage() {
                                 navigate(`/diary/${diary.id}`)
                             }
                         >
-                            <div className="mypage-diary-content">
+                           <div className="mypage-diary-content">
                                 <span className="mypage-diary-date">
                                     {diary.diaryDate}
                                 </span>
 
+                                <span className={diary.isPublic ? "mypage-public" : "mypage-private"}>
+                                    {diary.isPublic ? "공개" : "비공개"}
+                                </span>
+                            
                                 <h2 className="mypage-diary-title">
                                     {diary.title}
                                 </h2>
